@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Lab9_Eje4DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Equipo">
+    <Key>
+      <PropertyRef Name="IdEqu" />
+    </Key>
+    <Property Name="IdEqu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodTipEqu" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CodEst" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Icono" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CodExt" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EstadoEquipo" Relationship="Self.FK_Equipo_EstadoEquipo" FromRole="Equipo" ToRole="EstadoEquipo" />
+    <NavigationProperty Name="TipoEquipo" Relationship="Self.FK_Equipo_TipoEquipo" FromRole="Equipo" ToRole="TipoEquipo" />
+  </EntityType>
+  <EntityType Name="EstadoEquipo">
+    <Key>
+      <PropertyRef Name="CodEst" />
+    </Key>
+    <Property Name="CodEst" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DesEst" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Equipo" Relationship="Self.FK_Equipo_EstadoEquipo" FromRole="EstadoEquipo" ToRole="Equipo" />
+  </EntityType>
+  <EntityType Name="TipoEquipo">
+    <Key>
+      <PropertyRef Name="CodTipEqu" />
+    </Key>
+    <Property Name="CodTipEqu" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DesTip" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Equipo" Relationship="Self.FK_Equipo_TipoEquipo" FromRole="TipoEquipo" ToRole="Equipo" />
+  </EntityType>
+  <Association Name="FK_Equipo_EstadoEquipo">
+    <End Role="EstadoEquipo" Type="Self.EstadoEquipo" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoEquipo">
+        <PropertyRef Name="CodEst" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="CodEst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipo_TipoEquipo">
+    <End Role="TipoEquipo" Type="Self.TipoEquipo" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoEquipo">
+        <PropertyRef Name="CodTipEqu" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="CodTipEqu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Lab9_Eje4DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Equipo" EntityType="Self.Equipo" />
+    <EntitySet Name="EstadoEquipo" EntityType="Self.EstadoEquipo" />
+    <EntitySet Name="TipoEquipo" EntityType="Self.TipoEquipo" />
+    <AssociationSet Name="FK_Equipo_EstadoEquipo" Association="Self.FK_Equipo_EstadoEquipo">
+      <End Role="EstadoEquipo" EntitySet="EstadoEquipo" />
+      <End Role="Equipo" EntitySet="Equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipo_TipoEquipo" Association="Self.FK_Equipo_TipoEquipo">
+      <End Role="TipoEquipo" EntitySet="TipoEquipo" />
+      <End Role="Equipo" EntitySet="Equipo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

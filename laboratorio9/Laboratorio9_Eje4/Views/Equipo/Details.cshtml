@@ -1,0 +1,58 @@
+﻿@model Laboratorio9_Eje4.Models.Equipo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Equipo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Icono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodExt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodExt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoEquipo.DesEst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoEquipo.DesEst)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEquipo.DesTip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEquipo.DesTip)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdEqu }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Lab9_Eje4DBModelStoreContainer" CdmEntityContainer="Lab9_Eje4DBEntities">
+    <EntitySetMapping Name="Equipo">
+      <EntityTypeMapping TypeName="Lab9_Eje4DBModel.Equipo">
+        <MappingFragment StoreEntitySet="Equipo">
+          <ScalarProperty Name="IdEqu" ColumnName="IdEqu" />
+          <ScalarProperty Name="CodTipEqu" ColumnName="CodTipEqu" />
+          <ScalarProperty Name="CodEst" ColumnName="CodEst" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Icono" ColumnName="Icono" />
+          <ScalarProperty Name="CodExt" ColumnName="CodExt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadoEquipo">
+      <EntityTypeMapping TypeName="Lab9_Eje4DBModel.EstadoEquipo">
+        <MappingFragment StoreEntitySet="EstadoEquipo">
+          <ScalarProperty Name="CodEst" ColumnName="CodEst" />
+          <ScalarProperty Name="DesEst" ColumnName="DesEst" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoEquipo">
+      <EntityTypeMapping TypeName="Lab9_Eje4DBModel.TipoEquipo">
+        <MappingFragment StoreEntitySet="TipoEquipo">
+          <ScalarProperty Name="CodTipEqu" ColumnName="CodTipEqu" />
+          <ScalarProperty Name="DesTip" ColumnName="DesTip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

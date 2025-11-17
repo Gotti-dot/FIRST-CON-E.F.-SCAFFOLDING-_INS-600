@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Lab9_Eje5DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Curso">
+    <Key>
+      <PropertyRef Name="CursoId" />
+    </Key>
+    <Property Name="CursoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Creditos" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Inscripcion" Relationship="Self.FK_Inscripcion_Curso" FromRole="Curso" ToRole="Inscripcion" />
+  </EntityType>
+  <EntityType Name="Estudiante">
+    <Key>
+      <PropertyRef Name="EstudianteId" />
+    </Key>
+    <Property Name="EstudianteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Inscripcion" Relationship="Self.FK_Inscripcion_Estudiante" FromRole="Estudiante" ToRole="Inscripcion" />
+  </EntityType>
+  <EntityType Name="Inscripcion">
+    <Key>
+      <PropertyRef Name="IdInscripcion" />
+    </Key>
+    <Property Name="IdInscripcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EstudianteId" Type="Int32" Nullable="false" />
+    <Property Name="CursoId" Type="Int32" Nullable="false" />
+    <Property Name="FechaInscripcion" Type="DateTime" Precision="3" />
+    <Property Name="Calificacion" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Curso" Relationship="Self.FK_Inscripcion_Curso" FromRole="Inscripcion" ToRole="Curso" />
+    <NavigationProperty Name="Estudiante" Relationship="Self.FK_Inscripcion_Estudiante" FromRole="Inscripcion" ToRole="Estudiante" />
+  </EntityType>
+  <Association Name="FK_Inscripcion_Curso">
+    <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+    <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="CursoId" />
+      </Principal>
+      <Dependent Role="Inscripcion">
+        <PropertyRef Name="CursoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inscripcion_Estudiante">
+    <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+    <End Role="Inscripcion" Type="Self.Inscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiante">
+        <PropertyRef Name="EstudianteId" />
+      </Principal>
+      <Dependent Role="Inscripcion">
+        <PropertyRef Name="EstudianteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Lab9_Eje5DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Curso" EntityType="Self.Curso" />
+    <EntitySet Name="Estudiante" EntityType="Self.Estudiante" />
+    <EntitySet Name="Inscripcion" EntityType="Self.Inscripcion" />
+    <AssociationSet Name="FK_Inscripcion_Curso" Association="Self.FK_Inscripcion_Curso">
+      <End Role="Curso" EntitySet="Curso" />
+      <End Role="Inscripcion" EntitySet="Inscripcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inscripcion_Estudiante" Association="Self.FK_Inscripcion_Estudiante">
+      <End Role="Estudiante" EntitySet="Estudiante" />
+      <End Role="Inscripcion" EntitySet="Inscripcion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

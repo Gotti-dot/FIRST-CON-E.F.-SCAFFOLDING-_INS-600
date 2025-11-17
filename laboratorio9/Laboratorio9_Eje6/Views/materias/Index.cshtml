@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Laboratorio9_Eje6.Models.materias>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_materia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carga_horaria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carreras.nombre_carrera)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.docentes.ci)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_materia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.carga_horaria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.carreras.nombre_carrera)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.docentes.ci)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_materia }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_materia }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_materia })
+        </td>
+    </tr>
+}
+
+</table>

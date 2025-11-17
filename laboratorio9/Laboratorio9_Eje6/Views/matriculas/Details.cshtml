@@ -1,0 +1,58 @@
+﻿@model Laboratorio9_Eje6.Models.matriculas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>matriculas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gestion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_matricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carreras.nombre_carrera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carreras.nombre_carrera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estudiantes.ci)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estudiantes.ci)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.semestres.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.semestres.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_matricula }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

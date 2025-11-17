@@ -1,0 +1,26 @@
+﻿@model Laboratorio9_Eje4.Models.EstadoEquipo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EstadoEquipo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DesEst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DesEst)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodEst }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Lab9_Eje6DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="carreras">
+    <Key>
+      <PropertyRef Name="id_carrera" />
+    </Key>
+    <Property Name="id_carrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_carrera" Type="nvarchar" MaxLength="100" />
+    <Property Name="duracion" Type="int" />
+    <Property Name="descripcion" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="docentes">
+    <Key>
+      <PropertyRef Name="id_docente" />
+    </Key>
+    <Property Name="id_docente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ci" Type="nvarchar" MaxLength="20" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="profesion" Type="nvarchar" MaxLength="50" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="estudiantes">
+    <Key>
+      <PropertyRef Name="id_estudiante" />
+    </Key>
+    <Property Name="id_estudiante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ci" Type="nvarchar" MaxLength="20" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="fecha_nacimiento" Type="datetime" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="20" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="100" />
+    <Property Name="genero" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="materias">
+    <Key>
+      <PropertyRef Name="id_materia" />
+    </Key>
+    <Property Name="id_materia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_materia" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="carga_horaria" Type="int" />
+    <Property Name="id_carrera" Type="int" Nullable="false" />
+    <Property Name="id_docente" Type="int" />
+  </EntityType>
+  <EntityType Name="matriculas">
+    <Key>
+      <PropertyRef Name="id_matricula" />
+    </Key>
+    <Property Name="id_matricula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_estudiante" Type="int" Nullable="false" />
+    <Property Name="id_carrera" Type="int" Nullable="false" />
+    <Property Name="id_semestre" Type="int" Nullable="false" />
+    <Property Name="gestion" Type="int" />
+    <Property Name="fecha_matricula" Type="datetime" />
+  </EntityType>
+  <EntityType Name="semestres">
+    <Key>
+      <PropertyRef Name="id_semestre" />
+    </Key>
+    <Property Name="id_semestre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numero_semestre" Type="int" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Materia_Carrera">
+    <End Role="carreras" Type="Self.carreras" Multiplicity="1" />
+    <End Role="materias" Type="Self.materias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="carreras">
+        <PropertyRef Name="id_carrera" />
+      </Principal>
+      <Dependent Role="materias">
+        <PropertyRef Name="id_carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Materia_Docente">
+    <End Role="docentes" Type="Self.docentes" Multiplicity="0..1" />
+    <End Role="materias" Type="Self.materias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="docentes">
+        <PropertyRef Name="id_docente" />
+      </Principal>
+      <Dependent Role="materias">
+        <PropertyRef Name="id_docente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Matricula_Carrera">
+    <End Role="carreras" Type="Self.carreras" Multiplicity="1" />
+    <End Role="matriculas" Type="Self.matriculas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="carreras">
+        <PropertyRef Name="id_carrera" />
+      </Principal>
+      <Dependent Role="matriculas">
+        <PropertyRef Name="id_carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Matricula_Estudiante">
+    <End Role="estudiantes" Type="Self.estudiantes" Multiplicity="1" />
+    <End Role="matriculas" Type="Self.matriculas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiantes">
+        <PropertyRef Name="id_estudiante" />
+      </Principal>
+      <Dependent Role="matriculas">
+        <PropertyRef Name="id_estudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Matricula_Semestre">
+    <End Role="semestres" Type="Self.semestres" Multiplicity="1" />
+    <End Role="matriculas" Type="Self.matriculas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="semestres">
+        <PropertyRef Name="id_semestre" />
+      </Principal>
+      <Dependent Role="matriculas">
+        <PropertyRef Name="id_semestre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Lab9_Eje6DBModelStoreContainer">
+    <EntitySet Name="carreras" EntityType="Self.carreras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="docentes" EntityType="Self.docentes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estudiantes" EntityType="Self.estudiantes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="materias" EntityType="Self.materias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="matriculas" EntityType="Self.matriculas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="semestres" EntityType="Self.semestres" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Materia_Carrera" Association="Self.FK_Materia_Carrera">
+      <End Role="carreras" EntitySet="carreras" />
+      <End Role="materias" EntitySet="materias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Materia_Docente" Association="Self.FK_Materia_Docente">
+      <End Role="docentes" EntitySet="docentes" />
+      <End Role="materias" EntitySet="materias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Matricula_Carrera" Association="Self.FK_Matricula_Carrera">
+      <End Role="carreras" EntitySet="carreras" />
+      <End Role="matriculas" EntitySet="matriculas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Matricula_Estudiante" Association="Self.FK_Matricula_Estudiante">
+      <End Role="estudiantes" EntitySet="estudiantes" />
+      <End Role="matriculas" EntitySet="matriculas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Matricula_Semestre" Association="Self.FK_Matricula_Semestre">
+      <End Role="semestres" EntitySet="semestres" />
+      <End Role="matriculas" EntitySet="matriculas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

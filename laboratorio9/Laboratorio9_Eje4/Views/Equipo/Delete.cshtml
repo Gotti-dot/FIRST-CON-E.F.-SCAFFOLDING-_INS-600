@@ -1,0 +1,64 @@
+﻿@model Laboratorio9_Eje4.Models.Equipo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Equipo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Icono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodExt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodExt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoEquipo.DesEst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoEquipo.DesEst)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEquipo.DesTip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEquipo.DesTip)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

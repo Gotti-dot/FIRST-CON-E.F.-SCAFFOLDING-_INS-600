@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Lab9_Eje3DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="ClienteId" />
+    </Key>
+    <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Apellidos" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="15" />
+    <Property Name="FechaRegistro" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="LimiteCredito" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="200" />
+    <Property Name="Ciudad" Type="nvarchar" MaxLength="50" />
+    <Property Name="CodigoPostal" Type="nvarchar" MaxLength="10" />
+    <Property Name="Pais" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="Lab9_Eje3DBModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

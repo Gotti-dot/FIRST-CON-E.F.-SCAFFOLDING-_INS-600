@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Lab9_Eje4DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Equipo">
+    <Key>
+      <PropertyRef Name="IdEqu" />
+    </Key>
+    <Property Name="IdEqu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodTipEqu" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="CodEst" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Icono" Type="nvarchar" MaxLength="100" />
+    <Property Name="CodExt" Type="nvarchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="EstadoEquipo">
+    <Key>
+      <PropertyRef Name="CodEst" />
+    </Key>
+    <Property Name="CodEst" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="DesEst" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoEquipo">
+    <Key>
+      <PropertyRef Name="CodTipEqu" />
+    </Key>
+    <Property Name="CodTipEqu" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="DesTip" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Equipo_EstadoEquipo">
+    <End Role="EstadoEquipo" Type="Self.EstadoEquipo" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoEquipo">
+        <PropertyRef Name="CodEst" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="CodEst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipo_TipoEquipo">
+    <End Role="TipoEquipo" Type="Self.TipoEquipo" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoEquipo">
+        <PropertyRef Name="CodTipEqu" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="CodTipEqu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Lab9_Eje4DBModelStoreContainer">
+    <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadoEquipo" EntityType="Self.EstadoEquipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoEquipo" EntityType="Self.TipoEquipo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Equipo_EstadoEquipo" Association="Self.FK_Equipo_EstadoEquipo">
+      <End Role="EstadoEquipo" EntitySet="EstadoEquipo" />
+      <End Role="Equipo" EntitySet="Equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipo_TipoEquipo" Association="Self.FK_Equipo_TipoEquipo">
+      <End Role="TipoEquipo" EntitySet="TipoEquipo" />
+      <End Role="Equipo" EntitySet="Equipo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

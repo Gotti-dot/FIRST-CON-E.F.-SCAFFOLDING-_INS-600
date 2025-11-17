@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Lab9_Eje4DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="IdEqu" />
+          </Key>
+          <Property Name="IdEqu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodTipEqu" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="CodEst" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="100" />
+          <Property Name="CodExt" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="EstadoEquipo">
+          <Key>
+            <PropertyRef Name="CodEst" />
+          </Key>
+          <Property Name="CodEst" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="DesEst" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoEquipo">
+          <Key>
+            <PropertyRef Name="CodTipEqu" />
+          </Key>
+          <Property Name="CodTipEqu" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="DesTip" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Equipo_EstadoEquipo">
+          <End Role="EstadoEquipo" Type="Self.EstadoEquipo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoEquipo">
+              <PropertyRef Name="CodEst" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="CodEst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipo_TipoEquipo">
+          <End Role="TipoEquipo" Type="Self.TipoEquipo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEquipo">
+              <PropertyRef Name="CodTipEqu" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="CodTipEqu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Lab9_Eje4DBModelStoreContainer">
+          <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoEquipo" EntityType="Self.EstadoEquipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEquipo" EntityType="Self.TipoEquipo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Equipo_EstadoEquipo" Association="Self.FK_Equipo_EstadoEquipo">
+            <End Role="EstadoEquipo" EntitySet="EstadoEquipo" />
+            <End Role="Equipo" EntitySet="Equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipo_TipoEquipo" Association="Self.FK_Equipo_TipoEquipo">
+            <End Role="TipoEquipo" EntitySet="TipoEquipo" />
+            <End Role="Equipo" EntitySet="Equipo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Lab9_Eje4DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="IdEqu" />
+          </Key>
+          <Property Name="IdEqu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodTipEqu" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodEst" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Icono" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CodExt" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EstadoEquipo" Relationship="Self.FK_Equipo_EstadoEquipo" FromRole="Equipo" ToRole="EstadoEquipo" />
+          <NavigationProperty Name="TipoEquipo" Relationship="Self.FK_Equipo_TipoEquipo" FromRole="Equipo" ToRole="TipoEquipo" />
+        </EntityType>
+        <EntityType Name="EstadoEquipo">
+          <Key>
+            <PropertyRef Name="CodEst" />
+          </Key>
+          <Property Name="CodEst" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DesEst" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipo" Relationship="Self.FK_Equipo_EstadoEquipo" FromRole="EstadoEquipo" ToRole="Equipo" />
+        </EntityType>
+        <EntityType Name="TipoEquipo">
+          <Key>
+            <PropertyRef Name="CodTipEqu" />
+          </Key>
+          <Property Name="CodTipEqu" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DesTip" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Equipo" Relationship="Self.FK_Equipo_TipoEquipo" FromRole="TipoEquipo" ToRole="Equipo" />
+        </EntityType>
+        <Association Name="FK_Equipo_EstadoEquipo">
+          <End Role="EstadoEquipo" Type="Self.EstadoEquipo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoEquipo">
+              <PropertyRef Name="CodEst" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="CodEst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipo_TipoEquipo">
+          <End Role="TipoEquipo" Type="Self.TipoEquipo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEquipo">
+              <PropertyRef Name="CodTipEqu" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="CodTipEqu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Lab9_Eje4DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipo" EntityType="Self.Equipo" />
+          <EntitySet Name="EstadoEquipo" EntityType="Self.EstadoEquipo" />
+          <EntitySet Name="TipoEquipo" EntityType="Self.TipoEquipo" />
+          <AssociationSet Name="FK_Equipo_EstadoEquipo" Association="Self.FK_Equipo_EstadoEquipo">
+            <End Role="EstadoEquipo" EntitySet="EstadoEquipo" />
+            <End Role="Equipo" EntitySet="Equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipo_TipoEquipo" Association="Self.FK_Equipo_TipoEquipo">
+            <End Role="TipoEquipo" EntitySet="TipoEquipo" />
+            <End Role="Equipo" EntitySet="Equipo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Lab9_Eje4DBModelStoreContainer" CdmEntityContainer="Lab9_Eje4DBEntities">
+          <EntitySetMapping Name="Equipo">
+            <EntityTypeMapping TypeName="Lab9_Eje4DBModel.Equipo">
+              <MappingFragment StoreEntitySet="Equipo">
+                <ScalarProperty Name="IdEqu" ColumnName="IdEqu" />
+                <ScalarProperty Name="CodTipEqu" ColumnName="CodTipEqu" />
+                <ScalarProperty Name="CodEst" ColumnName="CodEst" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="CodExt" ColumnName="CodExt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoEquipo">
+            <EntityTypeMapping TypeName="Lab9_Eje4DBModel.EstadoEquipo">
+              <MappingFragment StoreEntitySet="EstadoEquipo">
+                <ScalarProperty Name="CodEst" ColumnName="CodEst" />
+                <ScalarProperty Name="DesEst" ColumnName="DesEst" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEquipo">
+            <EntityTypeMapping TypeName="Lab9_Eje4DBModel.TipoEquipo">
+              <MappingFragment StoreEntitySet="TipoEquipo">
+                <ScalarProperty Name="CodTipEqu" ColumnName="CodTipEqu" />
+                <ScalarProperty Name="DesTip" ColumnName="DesTip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

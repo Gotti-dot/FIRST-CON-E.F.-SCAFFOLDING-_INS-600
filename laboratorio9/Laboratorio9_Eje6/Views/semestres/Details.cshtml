@@ -1,0 +1,34 @@
+﻿@model Laboratorio9_Eje6.Models.semestres
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>semestres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.numero_semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero_semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_semestre }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
